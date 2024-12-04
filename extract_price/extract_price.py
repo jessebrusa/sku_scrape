@@ -1,11 +1,7 @@
-import requests
 from bs4 import BeautifulSoup
 import re
-import os
-import json
-from ..download_html.download_html import download_html_with_playwright
 
-def extract_prices(html):
+def prioritize_price_tags(html):
     soup = BeautifulSoup(html, 'html.parser')
     price_elements = []
 
@@ -63,32 +59,16 @@ def clean_price(price_text):
     except ValueError:
         return None
 
-def get_current_price(source):
-    if os.path.isfile(source):
-        # Read HTML content from file
-        with open(source, 'r', encoding='utf-8') as file:
-            html_content = file.read()
-    else:
-        # Fetch HTML content from URL
-        try:
-            response = requests.get(source, timeout=10)
-            response.raise_for_status()
-            html_content = response.text
-        except requests.exceptions.RequestException as e:
-            print(f"Error fetching {source}: {e}")
-            return None
-
-    price_elements = extract_prices(html_content)
+def get_current_price(html_content):
+    price_elements = prioritize_price_tags(html_content)
     prioritized_prices = prioritize_prices(price_elements)
 
     for element in prioritized_prices:
-        # Handle complex price structures
         if element.find('sup') and element.find('span'):
             price_text = ''.join([e.get_text() for e in element.find_all(['sup', 'span'])])
         else:
             price_text = element.get_text().strip()
         
-        # Exclude elements with "List" in the text
         if "List" in price_text:
             continue
         
@@ -98,52 +78,34 @@ def get_current_price(source):
 
     return None
 
-def main():
-    total_count = 0
-    pass_count = 0
-
-    with open('results.txt', 'w') as file:
-        file.write('')  # Clear the file at the start
-
-    with open('safe.json', 'r') as json_file:
-        data = json.load(json_file) 
-
-    for key, value in data.items():
-        total_count += 1
-        url = key
-        correct_price = value
-
-        current_price = get_current_price(url)
-
-        if current_price is None:
-            print(f'Fetching {url} with Playwright...')
-            current_price = download_html_with_playwright(url, 'barska_safe_with_js.html')
-            if current_price is None:
-                current_price = get_current_price('barska_safe_with_js.html')
-                print(f'Failed to fetch {url}')
-                result = f'fail\nError fetching {url}'
-
-        if current_price is None:
-            print(f'Failed to fetch {url}')
-            result = f'pass\nExpected: {correct_price}\nActual: {current_price}\nURL: {url}'
-        elif round(current_price, 2) == round(correct_price, 2):
-            print(f'PASS: {url}')
-            result = f'pass\nExpected: {correct_price}\nActual: {current_price}\nURL: {url}'
-            pass_count += 1
+def extract_price_list(price_dict):
+    keys_to_remove = []
+    for key, value in price_dict.items():
+        if 'file_path' in value:
+            html_file = value['file_path']
+            with open(html_file, 'r', encoding='utf-8') as file:
+                html_content = file.read()
+            price = get_current_price(html_content)
+            if price is not None:
+                price_dict[key]['value'] = price
+            else:
+                keys_to_remove.append(key)
         else:
-            print(f'FAIL: {url}')
-            result = f'fail\nExpected: {correct_price}\nActual: {current_price}\nURL: {url}'
-
-        with open('results.txt', 'a') as file:
-            file.write(f'{result}\n\n')
-
-    fail_count = total_count - pass_count
-    # Print and write out the pass and fail numbers
-    summary = f'Pass: {pass_count}\nFail: {fail_count}\n'
-    print(summary)
-    with open('results.txt', 'a') as file:
-        file.write(summary)
+            print(f"No file_path for key {key}, URL: {value['url']}")
+            keys_to_remove.append(key)
+    
+    for key in keys_to_remove:
+        del price_dict[key]
+    
+    return price_dict
 
 if __name__ == "__main__":
-    # main()
-    print(extract_prices('temp.html'))
+    price_dict = {
+        0: {'url': 'https://www.holdupdisplays.com/black-camo-gun-wall-bundle-hd100-bc/?srsltid=AfmBOorvSo1leB3tV49qa0qlBCT3-L8KjUjrUcfpQ9sEPTgL6W9khHQ-'},
+        1: {'url': 'https://www.safeandvaultstore.com/products/hold-up-displays-black-camo-gun-wall-bundle-hd100-bc?srsltid=AfmBOoqwormUU6-BL2R5LidreCZ7VnM_X-nCrHfdnMEUupfXKjZOjkLc', 'file_path': 'temp/1.html'},
+        2: {'url': 'https://homesafesusa.com/products/hold-up-gun-wall-display-black-camo-hd100-bc?srsltid=AfmBOoqcHsLeKxdBKkLXK2Hw4vdswhSV7BbnHrvZWzmgqiPkV7OT1491', 'file_path': 'temp/2.html'},
+        3: {'url': 'https://ironcladsentry.com/products/hold-up-displays-hd100-bc-black-camo-gun-wall-bundle', 'file_path': 'temp/3.html'},
+        4: {'url': 'https://www.smartlockbox.shop/product/category-gun-wall-armory-kits-brand-hold-up-displays-hold-up-displays-black-camo-gun-wall-bundle-hd100-bc/', 'file_path': 'temp/4.html'}
+    }
+    updated_price_dict = extract_price_list(price_dict)
+    print(f"Updated price_dict: {updated_price_dict}")
