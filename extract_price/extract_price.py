@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import re
+import os
 
 def prioritize_price_tags(html):
     soup = BeautifulSoup(html, 'html.parser')
@@ -87,9 +88,13 @@ def extract_price_list(price_dict):
                 html_content = file.read()
             price = get_current_price(html_content)
             if price is not None:
-                price_dict[key]['value'] = price
+                price = round(float(price), 2)
+                if price != 0:
+                    price_dict[key]['value'] = price
             else:
                 keys_to_remove.append(key)
+
+            os.remove(html_file)
         else:
             print(f"No file_path for key {key}, URL: {value['url']}")
             keys_to_remove.append(key)

@@ -1,7 +1,7 @@
 from googlesearch import search
 
 
-default_num_results = 5
+default_num_results = 10
 
 
 def perform_google_search(query, num_results=default_num_results):

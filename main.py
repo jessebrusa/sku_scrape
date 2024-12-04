@@ -36,19 +36,16 @@ def main():
         return
 
     price_dict = extract_price_list(html_dict)
-    for key, value in price_dict.items():
-        print(f'price: {value["value"]}\nurl: {value["url"]}')
+    for value in price_dict.values():
+        if 'value' in value:
+            print(f'price: {value["value"]}\nurl: {value["url"]}')
+        else:
+            print(f'Missing value for URL: {value["url"]}')
+
+    price_list = [value['value'] for value in price_dict.values() if 'value' in value]
+    price_list.sort()
+    print(price_list)
   
-
-    
-
-
-    
-
-    
-
-
-
 
 if __name__ == "__main__":
     main()
