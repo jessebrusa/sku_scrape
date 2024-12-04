@@ -98,10 +98,9 @@ def get_current_price(source):
 
     return None
 
-if __name__ == "__main__":
+def main():
     total_count = 0
     pass_count = 0
-
 
     with open('results.txt', 'w') as file:
         file.write('')  # Clear the file at the start
@@ -110,6 +109,7 @@ if __name__ == "__main__":
         data = json.load(json_file) 
 
     for key, value in data.items():
+        total_count += 1
         url = key
         correct_price = value
 
@@ -117,26 +117,25 @@ if __name__ == "__main__":
 
         if current_price is None:
             print(f'Fetching {url} with Playwright...')
-            download_html_with_playwright(url, 'barska_safe_with_js.html')
-            current_price = get_current_price('barska_safe_with_js.html')
+            current_price = download_html_with_playwright(url, 'barska_safe_with_js.html')
             if current_price is None:
+                current_price = get_current_price('barska_safe_with_js.html')
                 print(f'Failed to fetch {url}')
                 result = f'fail\nError fetching {url}'
-                continue
 
-        if round(current_price, 2) == round(correct_price, 2):
+        if current_price is None:
+            print(f'Failed to fetch {url}')
+            result = f'fail\nError fetching {url}'
+        elif round(current_price, 2) == round(correct_price, 2):
             print(f'PASS: {url}')
-            result = 'pass'
+            result = f'pass\nExpected: {correct_price}\nActual: {current_price}\nURL: {url}'
             pass_count += 1
         else:
             print(f'FAIL: {url}')
             result = f'fail\nExpected: {correct_price}\nActual: {current_price}\nURL: {url}'
 
-        
         with open('results.txt', 'a') as file:
             file.write(f'{result}\n\n')
-
-        total_count += 1
 
     fail_count = total_count - pass_count
     # Print and write out the pass and fail numbers
@@ -144,3 +143,6 @@ if __name__ == "__main__":
     print(summary)
     with open('results.txt', 'a') as file:
         file.write(summary)
+
+if __name__ == "__main__":
+    main()
