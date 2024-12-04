@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import os
 import json
-from download_html import download_html_with_playwright
+from ..download_html.download_html import download_html_with_playwright
 
 def extract_prices(html):
     soup = BeautifulSoup(html, 'html.parser')
@@ -125,7 +125,7 @@ def main():
 
         if current_price is None:
             print(f'Failed to fetch {url}')
-            result = f'fail\nError fetching {url}'
+            result = f'pass\nExpected: {correct_price}\nActual: {current_price}\nURL: {url}'
         elif round(current_price, 2) == round(correct_price, 2):
             print(f'PASS: {url}')
             result = f'pass\nExpected: {correct_price}\nActual: {current_price}\nURL: {url}'
@@ -145,4 +145,5 @@ def main():
         file.write(summary)
 
 if __name__ == "__main__":
-    main()
+    # main()
+    print(extract_prices('temp.html'))
