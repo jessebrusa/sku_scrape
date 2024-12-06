@@ -1,4 +1,3 @@
-import requests
 from playwright.sync_api import sync_playwright
 
 def download_html_playwright_non_headless(url, page):

@@ -1,0 +1,88 @@
+[
+    {
+        "item_name": "Boss Strongbox 7125-7413 Top Loader",
+        "expected_result": {
+            "ironcladsentry.com": "https://ironcladsentry.com/products/boss-strongbox-7125-7413-top-loader/",
+            "example.com": "https://example.com/products/boss-strongbox-7125-7413-top-loader/",
+            "anotherdomain.com": "https://anotherdomain.com/products/boss-strongbox-7125-7413-top-loader/"
+        },
+        "actual_result": {
+            "ironcladsentry.com": "https://ironcladsentry.com/products/boss-strongbox-7125-7413-top-loader/",
+            "example.com": "https://example.com/products/boss-strongbox-7125-7413-top-loader/",
+            "anotherdomain.com": "https://anotherdomain.com/products/boss-strongbox-7125-7413-top-loader/"
+        },
+        "passed": true
+    },
+    {
+        "item_name": "Another Product",
+        "expected_result": {
+            "example.com": "https://example.com/products/another-product/",
+            "anotherdomain.com": "https://anotherdomain.com/products/another-product/"
+        },
+        "actual_result": {
+            "example.com": "https://example.com/products/another-product/",
+            "anotherdomain.com": "https://anotherdomain.com/products/another-product/"
+        },
+        "passed": true
+    },
+    {
+        "item_name": "Special Item",
+        "expected_result": {
+            "example.com": "https://example.com/products/special-item/",
+            "anotherdomain.com": "https://anotherdomain.com/products/special-item/"
+        },
+        "actual_result": {
+            "example.com": "https://example.com/products/special-item/",
+            "anotherdomain.com": "https://anotherdomain.com/products/special-item/"
+        },
+        "passed": true
+    },
+    {
+        "item_name": "No Links",
+        "expected_result": {},
+        "actual_result": {},
+        "passed": true
+    },
+    {
+        "item_name": "Nonexistent Item",
+        "expected_result": {},
+        "actual_result": {},
+        "passed": true
+    },
+    {
+        "item_name": "Item",
+        "expected_result": {
+            "sub.example.com": "https://sub.example.com/products/item/",
+            "anotherdomain.com": "https://anotherdomain.com/products/item/"
+        },
+        "actual_result": {
+            "sub.example.com": "https://sub.example.com/products/item/",
+            "anotherdomain.com": "https://anotherdomain.com/products/item/"
+        },
+        "passed": true
+    },
+    {
+        "item_name": "Special Item 123",
+        "expected_result": {
+            "example.com": "https://example.com/products/special-item-123/",
+            "anotherdomain.com": "https://anotherdomain.com/products/special-item-123/"
+        },
+        "actual_result": {
+            "example.com": "https://example.com/products/special-item-123/",
+            "anotherdomain.com": "https://anotherdomain.com/products/special-item-123/"
+        },
+        "passed": true
+    },
+    {
+        "item_name": "Sub Item",
+        "expected_result": {
+            "sub.example.com": "https://sub.example.com/products/sub-item/",
+            "anotherdomain.com": "https://anotherdomain.com/products/sub-item/"
+        },
+        "actual_result": {
+            "sub.example.com": "https://sub.example.com/products/sub-item/",
+            "anotherdomain.com": "https://anotherdomain.com/products/sub-item/"
+        },
+        "passed": true
+    }
+]

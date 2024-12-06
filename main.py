@@ -9,14 +9,14 @@ import json
 #             'AX13090', '335-01', 'NSGNYX15M5G9DX2', 'TAVT36WN9COLL102', 'TAVT36MNASIDE101',
 #             'TIBNBX4381L', '403018', 'B1755111']
 
-item_name = 'Armasight Collector 320 1.5-6x19 Compact Thermal Weapon Sight'
+upc = '810081911696'
 
 def main():
-    if not item_name:
+    if not upc:
         print('No SKU list found')
         return
 
-    url_list = collect_links(item_name)
+    url_list = collect_links(upc)
     if not url_list:
         print('No links found')
         return
