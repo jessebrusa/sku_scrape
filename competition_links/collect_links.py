@@ -1,7 +1,7 @@
 from googlesearch import search
 
 
-default_num_results = 10
+default_num_results = 30
 
 
 def perform_google_search(query, num_results=default_num_results):
@@ -11,14 +11,13 @@ def perform_google_search(query, num_results=default_num_results):
     return urls
 
 
-def collect_links(sku):
-    if not isinstance(sku, list):
-        sku = [sku]
-        
+def collect_links(item_name):
+    if not isinstance(item_name, list):
+        item_name = [item_name]
+
     url_list = []
-    for item in sku:
-        query = f'SKU {item}'
-        urls = perform_google_search(query)
+    for item in item_name:
+        urls = perform_google_search(f'product page: {item}')
         url_list.extend(urls)
         
     return url_list

@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import re
 import os
 
+delete_html_files = False
+
 def prioritize_price_tags(html):
     soup = BeautifulSoup(html, 'html.parser')
     price_elements = []
@@ -94,7 +96,8 @@ def extract_price_list(price_dict):
             else:
                 keys_to_remove.append(key)
 
-            os.remove(html_file)
+            if delete_html_files:
+                os.remove(html_file)
         else:
             print(f"No file_path for key {key}, URL: {value['url']}")
             keys_to_remove.append(key)

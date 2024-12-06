@@ -1,53 +1,41 @@
 import requests
 from playwright.sync_api import sync_playwright
 
-def download_html_requests(url):
+def download_html_playwright_non_headless(url, page):
     try:
-        response = requests.get(url, timeout=3)
-        response.raise_for_status() 
-        return response.text
-    except requests.exceptions.RequestException as e:
-        return None
-
-def download_html_playwright(url, headless=True):
-    try:
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=headless)
-            page = browser.new_page()
-            page.goto(url, wait_until='load')
-            page_content = page.content()
-            browser.close()
-            return page_content
+        page.goto(url, wait_until='load')
+        page_content = page.content()
+        return page_content
     except Exception as e:
+        print(f"An error occurred with Playwright (non-headless): {e}")
         return None
 
-def download_html(url):
-    html = download_html_requests(url)
+def download_html(url, page):
+    print(f"Attempting to download HTML for {url} using Playwright (non-headless)...")
+    html = download_html_playwright_non_headless(url, page)
     if html:
         return html
 
-    html = download_html_playwright(url, headless=True)
-    if html:
-        return html
-    
-    html = download_html_playwright(url, headless=False)
-    if html:
-        return html
-
+    print(f"Failed to download HTML for {url} using all methods.")
     return None
 
 def save_html(price_dict):
     url_list_valid = []
-    for key, value in price_dict.items():
-        url = value['url']
-        html = download_html(url)
-        if html:
-            filename = f'temp/{key}.html'
-            with open(filename, 'w', encoding='utf-8') as file:
-                file.write(html)
-            url_list_valid.append(url)
-            price_dict[key]['file_path'] = filename
-
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False)
+        page = browser.new_page()
+        for key, value in price_dict.items():
+            url = value['url']
+            html = download_html(url, page)
+            if html:
+                filename = f'temp/{key}.html'
+                with open(filename, 'w', encoding='utf-8') as file:
+                    file.write(html)
+                url_list_valid.append(url)
+                price_dict[key]['file_path'] = filename
+            else:
+                print(f'No html downloaded for {url}')
+        browser.close()
     return price_dict
 
 if __name__ == "__main__":
