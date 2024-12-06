@@ -1,4 +1,5 @@
-from competition_links.collect_links import collect_links
+from competition_links.playwright_links import collect_google_links
+from filter_links.filter_links import filter_links
 from dictionary.manipulate_dict import initialize_dict, remove_entries_without_file_path
 from download_html.download_html import save_html
 from extract_price.extract_price import extract_price_list
@@ -10,33 +11,52 @@ import json
 #             'TIBNBX4381L', '403018', 'B1755111']
 
 upc = '810081911696'
+item_name = 'Armasight Collector 320 1.5-6x19 Compact Thermal Weapon Sight'
 
 def main():
-    if not upc:
-        print('No SKU list found')
-        return
+    # if not upc:
+    #     print('No SKU list found')
+    #     return
 
-    url_list = collect_links(upc)
-    if not url_list:
-        print('No links found')
-        return
+    # url_list = collect_google_links(item_name)
+    # if not url_list:
+    #     print('No links found')
+    #     return
+
+    # with open('playwright.txt', 'r') as file:
+    #     url_list = [line.strip() for line in file.readlines()]
+    # if url_list:
+    #     print(f'Number of links: {len(url_list)}')
     
-    for url in url_list:
-        print(url)
+    # if not url_list:
+    #     return 
     
-    url_dict = initialize_dict(url_list)
-    if not url_dict:
-        print('No dictionary created')
-        return
+    # filtered_url_dict = filter_links(url_list, item_name)
+    # if not filtered_url_dict:
+    #     print('No filtered links found')
+    #     return
     
-    html_dict = save_html(url_dict)
+    # print(f'Number of filtered links: {len(filtered_url_dict)}')
+    # with open('filter_url_dict.json', 'w') as file:
+    #     json.dump(filtered_url_dict, file, indent=4)
+    
+    
+    # url_dict = initialize_dict(url_list)
+    # if not url_dict:
+    #     print('No dictionary created')
+    #     return
+
+    with open('filter_url_dict.json', 'r') as file:
+        filtered_url_dict = json.load(file)
+    
+    html_dict = save_html(filtered_url_dict)
     if not html_dict:
         print('No html saved')
         return
     
 
-    for key, value in html_dict.items():
-        print(f'{key}: {value}')
+    # for key, value in html_dict.items():
+    #     print(f'{key}: {value}')
 
 
     # html_dict = remove_entries_without_file_path(html_dict)

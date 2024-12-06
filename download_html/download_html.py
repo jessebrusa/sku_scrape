@@ -23,15 +23,14 @@ def save_html(price_dict):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
-        for key, value in price_dict.items():
-            url = value['url']
+        for domain, url in price_dict.items():
             html = download_html(url, page)
             if html:
-                filename = f'temp/{key}.html'
+                filename = f'temp/{domain}.html'
                 with open(filename, 'w', encoding='utf-8') as file:
                     file.write(html)
                 url_list_valid.append(url)
-                price_dict[key]['file_path'] = filename
+                price_dict[domain] = {'url': url, 'file_path': filename}
             else:
                 print(f'No html downloaded for {url}')
         browser.close()
@@ -39,8 +38,8 @@ def save_html(price_dict):
 
 if __name__ == "__main__":
     price_dict = {
-        0: {'url': 'https://www.ralphs.com/p/barska-security-safe-black-1-20-cu-ft-cap-ax13090/0079027200375'},
-        1: {'url': 'https://www.holdupdisplays.com/black-camo-gun-wall-bundle-hd100-bc/?srsltid=AfmBOopwMv_AwCob1mDoBu1ZddQnknCC9ZmcMLFFWpvRx_gsgHfQDVwu'}
+        'ralphs': 'https://www.ralphs.com/p/barska-security-safe-black-1-20-cu-ft-cap-ax13090/0079027200375',
+        'holdupdisplays': 'https://www.holdupdisplays.com/black-camo-gun-wall-bundle-hd100-bc/?srsltid=AfmBOopwMv_AwCob1mDoBu1ZddQnknCC9ZmcMLFFWpvRx_gsgHfQDVwu'
     }
     valid_links = save_html(price_dict)
     print(f"Valid links: {valid_links}")
