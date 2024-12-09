@@ -1,0 +1,97 @@
+{
+    "www.guidefitter.com": {
+        "url": "https://www.guidefitter.com/armasight/shop/c/thermal-imaging",
+        "file_path": "temp/www.guidefitter.com.html",
+        "price": 6699.0
+    },
+    "www.ebay.com": {
+        "url": "https://www.ebay.com/b/Armasight-Hunting-Thermal-Scopes/40970/bn_54323343",
+        "file_path": "temp/www.ebay.com.html",
+        "price": 3100.0
+    },
+    "cameralandny.com": {
+        "url": "https://cameralandny.com/shop/armasight-collector-320-1-5-6x19-compact-thermal-weapon-sight-tavt36wn9coll102/c3291d80-bd31-013b-3f56-00163e90e196?variation=3422244&srsltid=AfmBOooYeEQC3IHSrR9oWOEmGGjn_NQmA-1sZMrziARkEEQbkIcFEbgw",
+        "file_path": "temp/cameralandny.com.html",
+        "price": 2199.0
+    },
+    "www.testequipmentdepot.com": {
+        "url": "https://www.testequipmentdepot.com/teledyne-flir-ptq136-breach-multifunctional-thermal-imaging-monocular-with-boson-core-and-91mm-lens-320-x-256-60-hz.html",
+        "file_path": "temp/www.testequipmentdepot.com.html",
+        "price": 2899.0
+    },
+    "ironcladsentry.com": {
+        "url": "https://ironcladsentry.com/products/armasight-collector-320-1-5-6x19-compact-thermal-weapon-sight",
+        "file_path": "temp/ironcladsentry.com.html",
+        "price": 2199.0
+    },
+    "armasight.com": {
+        "url": "https://armasight.com/thermal-imaging/thermal-weapon-sights/",
+        "file_path": "temp/armasight.com.html",
+        "price": 3499.0
+    },
+    "www.bhphotovideo.com": {
+        "url": "https://www.bhphotovideo.com/c/product/1801322-REG/armasight_tavt36wn9coll102_1_5_6x19_collector_320_compact.html",
+        "file_path": "temp/www.bhphotovideo.com.html",
+        "price": 2145.4
+    },
+    "www.thirdcoastthermal.com": {
+        "url": "https://www.thirdcoastthermal.com/products/collector-321",
+        "file_path": "temp/www.thirdcoastthermal.com.html",
+        "price": 2399.0
+    },
+    "www.sportoptics.com": {
+        "url": "https://www.sportoptics.com/armasight-collector-320-1-5-6x19-mini-weapon-sight-tavt36wn9coll102.html?srsltid=AfmBOoqJNUgZiM3vLSEaVHayrZ6mueJ-FEJvrrjAK5duACVUto_Fhwdg",
+        "file_path": "temp/www.sportoptics.com.html",
+        "price": 2199.0
+    },
+    "anvsinc.com": {
+        "url": "https://anvsinc.com/product/collector-320-compact-thermal-weapon-sight/",
+        "file_path": "temp/anvsinc.com.html",
+        "price": 2300.0
+    },
+    "www.txfowlers.com": {
+        "url": "https://www.txfowlers.com/products/nightride-scout-thermal-camera?variant=48529230299367",
+        "file_path": "temp/www.txfowlers.com.html",
+        "price": 2659.87
+    },
+    "shop.thermal.com": {
+        "url": "https://shop.thermal.com/nano-series",
+        "file_path": "temp/shop.thermal.com.html",
+        "price": 124.99
+    },
+    "en.wikipedia.org": {
+        "url": "https://en.wikipedia.org/wiki/AN/PAS-13#:~:text=The%20AN%2FPAS%2D13B%20thermal,United%20States%20military%20by%20Raytheon.",
+        "file_path": "temp/en.wikipedia.org.html",
+        "price": 250.0
+    },
+    "www.greentop.com": {
+        "url": "https://www.greentop.com/hunting/optics/night-vision/shop/armasight/",
+        "file_path": "temp/www.greentop.com.html",
+        "price": 2199.0
+    },
+    "nightvisionuniverse.com": {
+        "url": "https://nightvisionuniverse.com/products/armasight-collector-compact-320-thermal-scope-19mm?srsltid=AfmBOopVNBBSkLAqaka3JzZZ4X7W4YyqeXi0c2MJXRgWMLFeqjNF2oQY",
+        "file_path": "temp/nightvisionuniverse.com.html",
+        "price": 2500.0
+    },
+    "www.scopelist.com": {
+        "url": "https://www.scopelist.com/Armasight-Collector-320-15-6x-19-mm-Gray-Thermal-Mini-Weapon-Sight-TAVT36WN9COLL.aspx",
+        "file_path": "temp/www.scopelist.com.html",
+        "price": 250.0
+    },
+    "www.eurooptic.com": {
+        "url": "https://www.eurooptic.com/Armasight-Collector-320-15-6x-19-mm-Gray-Thermal-Mini-Weapon-Sight-TAVT36WN9COLL.aspx",
+        "file_path": "temp/www.eurooptic.com.html",
+        "price": 125.0
+    },
+    "www.opticsplanet.com": {
+        "url": "https://www.opticsplanet.com/armasight-collector-320-1-5-6x19mm-thermal-mini-weapon-sight.html?srsltid=AfmBOoreMNqT76ESNCrilR7IQMCRl6gsfQ5mZvU2D5uoDS160VZB3siS",
+        "file_path": "temp/www.opticsplanet.com.html",
+        "price": 4399.0
+    },
+    "ads.opticsforce.com": {
+        "url": "https://ads.opticsforce.com/products/armasight-collector-320-1-5-6x-thermal-mini-weapon-sight-19mm-lens-gray",
+        "file_path": "temp/ads.opticsforce.com.html",
+        "price": 2199.0
+    }
+}

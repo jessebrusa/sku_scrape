@@ -6,7 +6,7 @@ def collect_google_links(item_name, num_links, keywords):
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
 
-        query = f'shop {item_name}'
+        query = f'buy {item_name}'
         page.goto(f'https://www.google.com/search?q={query}')
 
         while len(links) < num_links:

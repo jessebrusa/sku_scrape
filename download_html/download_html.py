@@ -23,6 +23,7 @@ def save_html(price_dict):
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
+        domains_to_remove = []
         for domain, url in price_dict.items():
             html = download_html(url, page)
             if html:
@@ -33,6 +34,9 @@ def save_html(price_dict):
                 price_dict[domain] = {'url': url, 'file_path': filename}
             else:
                 print(f'No html downloaded for {url}')
+                domains_to_remove.append(domain)
+        for domain in domains_to_remove:
+            del price_dict[domain]
         browser.close()
     return price_dict
 
